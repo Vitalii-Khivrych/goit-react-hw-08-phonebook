@@ -1,18 +1,36 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import axios from 'axios';
 
 export const CONTACTS = 'contacts';
 const tagTypes = ['contacts'];
 
+const axiosBaseQuery =
+  ({ baseUrl } = { baseUrl: '' }) =>
+  async ({ url, method, data, params }) => {
+    try {
+      const result = await axios({ url: baseUrl + url, method, data, params });
+      return { data: result.data };
+    } catch (axiosError) {
+      let err = axiosError;
+      return {
+        error: {
+          status: err.response?.status,
+          data: err.response?.data || err.message,
+        },
+      };
+    }
+  };
+
 export const contactsApi = createApi({
   reducerPath: CONTACTS,
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://6311b9bf19eb631f9d77a9ff.mockapi.io/',
+  baseQuery: axiosBaseQuery({
+    baseUrl: 'https://connections-api.herokuapp.com/',
   }),
   tagTypes: tagTypes,
 
   endpoints: builder => ({
     getContacts: builder.query({
-      query: () => CONTACTS,
+      query: () => ({ url: CONTACTS, method: 'get' }),
       providesTags: tagTypes,
     }),
 
@@ -20,7 +38,7 @@ export const contactsApi = createApi({
       query: newContact => ({
         url: CONTACTS,
         method: 'POST',
-        body: newContact,
+        data: newContact,
       }),
       invalidatesTags: tagTypes,
     }),

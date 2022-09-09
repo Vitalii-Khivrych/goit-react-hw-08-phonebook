@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { useDeleteContactMutation } from 'redux/contacts/contactsSlice';
+import { useDeleteContactMutation } from 'redux/contacts/contacts-slice';
 import { Text, Button, Wraper } from './ContactItem.styled';
 import { LoaderDelete } from 'components';
 

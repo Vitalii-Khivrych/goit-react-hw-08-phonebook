@@ -1,28 +1,16 @@
-import { AiOutlineHome } from 'react-icons/ai';
-import { GiFilmStrip } from 'react-icons/gi';
-import { AppNav, AppLink } from './AppBar.styled';
+import { UserMenu, AuthNav, Navigation } from 'components';
+import { useSelector } from 'react-redux';
 
-const navItems = [
-  { href: '/', text: 'Home', icon: AiOutlineHome },
-  { href: '/register', text: 'register', icon: GiFilmStrip },
-  { href: 'login', text: 'login', icon: GiFilmStrip },
-  { href: 'contacts', text: 'contacts', icon: GiFilmStrip },
-];
+import { AppNav } from './AppBar.styled';
+import authSelectors from '../../redux/auth/auth-selectors';
 
 export const AppBar = () => {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+
   return (
     <AppNav>
-      {navItems.map(({ href, text, icon: Icon }) => (
-        <AppLink to={href} key={href}>
-          <Icon
-            style={{
-              fontSize: '20',
-              marginRight: '8px',
-            }}
-          />
-          {text}
-        </AppLink>
-      ))}
+      <Navigation />
+      {isLoggedIn ? <UserMenu /> : <AuthNav />}
     </AppNav>
   );
 };

@@ -1,23 +1,45 @@
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import authOperations from 'redux/auth/auth-operations';
+import { useLocalStorage } from 'hooks/useLocalStorage';
+
 const theme = createTheme();
 
 export default function SignIn() {
+  const [email, setEmail] = useLocalStorage('number', '');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case 'email':
+        return setEmail(value);
+      case 'password':
+        return setPassword(value);
+      default:
+        return;
+    }
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    dispatch(authOperations.logIn({ email, password }));
+    // reset()
+  };
+
+  const reset = () => {
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -32,9 +54,6 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}> */}
-          {/* <LockOutlinedIcon /> */}
-          {/* </Avatar> */}
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -53,6 +72,8 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -63,6 +84,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={handleChange}
             />
 
             <Button

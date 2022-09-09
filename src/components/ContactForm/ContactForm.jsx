@@ -5,7 +5,7 @@ import { useLocalStorage } from 'hooks/useLocalStorage';
 import {
   useAddContactMutation,
   useGetContactsQuery,
-} from 'redux/contacts/contactsSlice';
+} from 'redux/contacts/contacts-slice';
 import optionsNotify from 'helpers/toastConfig';
 
 import {

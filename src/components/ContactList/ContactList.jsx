@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 
 import { ContactItem } from '../ContactItem/ContactItem';
-import { useGetContactsQuery } from 'redux/contacts/contactsSlice';
-import { getFilter } from 'redux/filter/filterSelectors';
+import { useGetContactsQuery } from 'redux/contacts/contacts-slice';
+import { getFilter } from 'redux/filter/filter-selectors';
 import { List, Item } from './ContactList.styled';
 
 export function ContactList() {
