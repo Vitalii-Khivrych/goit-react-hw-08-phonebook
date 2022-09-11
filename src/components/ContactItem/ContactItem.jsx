@@ -1,19 +1,30 @@
 import PropTypes from 'prop-types';
 
 import { useDeleteContactMutation } from 'redux/contacts/contacts-slice';
-import { Text, Button, Wraper } from './ContactItem.styled';
+import { Text, Button, Wrapper } from './ContactItem.styled';
 import { LoaderDelete } from 'components';
 
-export function ContactItem({ name, number, id }) {
+export function ContactItem({ name, number, id, position }) {
   const [deleteContact, { isLoading }] = useDeleteContactMutation();
 
   return (
     <>
-      <Wraper>
-        <Text>{name}:</Text>
-        <Text>{number}</Text>
-      </Wraper>
+      <Wrapper>
+        <Text>
+          <span>{position}. </span>
+          {name}:
+        </Text>
 
+        <Text>{number}</Text>
+      </Wrapper>
+
+      {/* <Button
+        type="button"
+        disabled={isLoading}
+        onClick={() => deleteContact(id)}
+      >
+        {isLoading ? <LoaderDelete /> : 'Edit'}
+      </Button> */}
       <Button
         type="button"
         disabled={isLoading}

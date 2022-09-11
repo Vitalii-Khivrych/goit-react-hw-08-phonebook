@@ -1,23 +1,27 @@
 import React from 'react';
-import LoginIcon from '@mui/icons-material/Login';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import { NavLink } from 'react-router-dom';
+
+import {
+  Box,
+  NavLinkStyled,
+  LoginIconStyled,
+  RegisterIconStyled,
+} from './AuthNav.styled';
 
 const navItems = [
-  { href: '/register', text: 'Register', icon: PersonAddIcon },
-  { href: 'login', text: 'Login', icon: LoginIcon },
+  { href: '/register', text: 'Register', icon: RegisterIconStyled },
+  { href: 'login', text: 'Login', icon: LoginIconStyled },
 ];
 
 function AuthNav() {
   return (
-    <div>
+    <Box>
       {navItems.map(({ href, text, icon: Icon }) => (
-        <NavLink to={href} key={href}>
+        <NavLinkStyled to={href} key={href}>
           <Icon />
           {text}
-        </NavLink>
+        </NavLinkStyled>
       ))}
-    </div>
+    </Box>
   );
 }
 

@@ -1,16 +1,23 @@
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Box,
+  Container,
+  Typography,
+} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import styled from '@emotion/styled';
 
 import authOperations from 'redux/auth/auth-operations';
+import authSelectors from 'redux/auth/auth-selectors';
 import { useLocalStorage } from 'hooks/useLocalStorage';
+import optionsNotify from 'helpers/toastConfig';
 
 const theme = createTheme();
 
@@ -19,6 +26,7 @@ export default function Register() {
   const [email, setEmail] = useLocalStorage('number', '');
   const [password, setPassword] = useState('');
 
+  const isLoading = useSelector(authSelectors.getIsLoading);
   const dispatch = useDispatch();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -37,16 +45,15 @@ export default function Register() {
   const handleSubmit = event => {
     event.preventDefault();
 
-    // const data = new FormData(event.target);
-    // const newUser = {
-    //   name: data.get('name'),
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // };
-    // console.log(newUser);
+    const isEmptyFieldForm = name && email && password;
+
+    if (!isEmptyFieldForm) {
+      toast.warning(`There are empty fields`, optionsNotify);
+      return;
+    }
 
     dispatch(authOperations.register({ name, email, password }));
-    // reset()
+    reset();
   };
 
   const reset = () => {
@@ -96,6 +103,7 @@ export default function Register() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              type="email"
               value={email}
               onChange={handleChange}
             />
@@ -112,17 +120,24 @@ export default function Register() {
               onChange={handleChange}
             />
 
-            <Button
+            <Btn
               type="submit"
               fullWidth
               variant="contained"
+              disabled={isLoading}
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-            </Button>
+            </Btn>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
   );
 }
+
+const Btn = styled(Button)`
+  :hover {
+    background-color: #b5932c;
+  }
+`;

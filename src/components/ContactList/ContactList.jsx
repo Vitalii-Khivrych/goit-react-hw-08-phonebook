@@ -21,9 +21,14 @@ export function ContactList() {
   return (
     <List>
       {contacts &&
-        filteredContacts.map(({ id, name, number }) => (
+        filteredContacts.map(({ id, name, number }, index) => (
           <Item key={id}>
-            <ContactItem id={id} name={name} number={number} />
+            <ContactItem
+              id={id}
+              name={name}
+              number={number}
+              position={index + 1}
+            />
           </Item>
         ))}
     </List>

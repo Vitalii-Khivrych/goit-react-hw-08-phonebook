@@ -1,35 +1,41 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const Text = styled.p`
-  font-size: 17px;
+  font-size: ${props => props.theme.fontSizes.medium};
   font-weight: 400;
 `;
 
-export const Wraper = styled.div`
-  width: 310px;
+export const Wrapper = styled.div`
+  width: 80%;
   display: flex;
   justify-content: space-between;
+
+  margin-right: ${props => props.theme.spacing.step * 3}px;
 `;
 
 export const Button = styled.button`
-  width: 44px;
-  height: 20px;
-
-  font-size: 11px;
+  width: 46px;
+  height: 26px;
+  margin: 0 auto;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background-color: rgb(91, 153, 153);
-
+  color: ${props => props.theme.colors.light};
+  background: ${props => props.theme.colors.btn};
+  border-radius: ${props => props.theme.spacing.step}px;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 15%);
-  border: none;
-  border-radius: 4px;
 
-  cursor: pointer;
+  font-size: 11px;
+  font-weight: 400;
 
-  :hover {
-    background-color: rgb(109, 206, 206);
+  &:hover,
+  &:focus {
+    background: ${props => props.theme.colors.accent};
+  }
+
+  :not(:last-child) {
+    margin-right: ${props => props.theme.spacing.step * 2}px;
   }
 `;

@@ -15,12 +15,11 @@ export const LoaderCreate = () => {
 export const LoaderDelete = () => {
   return (
     <ProgressBar
-      height="80"
-      width="100"
+      height="60"
+      width="80"
       ariaLabel="progress-bar-loading"
-      wrapperStyle={{}}
       wrapperClass="progress-bar-wrapper"
-      borderColor="red"
+      borderColor="blue"
       barColor="#ffff"
     />
   );

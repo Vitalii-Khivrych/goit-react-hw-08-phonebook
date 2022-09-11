@@ -1,23 +1,32 @@
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  Box,
+  Container,
+  Typography,
+} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import styled from '@emotion/styled';
 
 import authOperations from 'redux/auth/auth-operations';
+import authSelectors from 'redux/auth/auth-selectors';
 import { useLocalStorage } from 'hooks/useLocalStorage';
+import optionsNotify from 'helpers/toastConfig';
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const [email, setEmail] = useLocalStorage('number', '');
+  const [email, setEmail] = useLocalStorage('email', '');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+
+  const isLoading = useSelector(authSelectors.getIsLoading);
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -33,8 +42,15 @@ export default function SignIn() {
   const handleSubmit = event => {
     event.preventDefault();
 
+    const isEmptyFieldForm = email && password;
+
+    if (!isEmptyFieldForm) {
+      toast.warning(`There are empty fields`, optionsNotify);
+      return;
+    }
+
     dispatch(authOperations.logIn({ email, password }));
-    // reset()
+    reset();
   };
 
   const reset = () => {
@@ -72,6 +88,7 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              type="email"
               value={email}
               onChange={handleChange}
             />
@@ -88,17 +105,24 @@ export default function SignIn() {
               onChange={handleChange}
             />
 
-            <Button
+            <Btn
               type="submit"
               fullWidth
               variant="contained"
+              disabled={isLoading}
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-            </Button>
+            </Btn>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
   );
 }
+
+const Btn = styled(Button)`
+  :hover {
+    background-color: #b5932c;
+  }
+`;
