@@ -19,7 +19,7 @@ export const LoaderDelete = () => {
       width="80"
       ariaLabel="progress-bar-loading"
       wrapperClass="progress-bar-wrapper"
-      borderColor="blue"
+      borderColor="red"
       barColor="#ffff"
     />
   );

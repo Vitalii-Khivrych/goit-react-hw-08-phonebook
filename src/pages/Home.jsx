@@ -1,23 +1,35 @@
 import React from 'react';
-
-import image from 'images/background-image.jpg';
 import styled from '@emotion/styled';
 
 function Home() {
   return (
-    <Box>
-      <Image src={image} alt="Home poster" />
-    </Box>
+    <Container>
+      <Title>Yor Phonebook</Title>
+      <Text>Connect with your contacts!</Text>
+      <Text>All your contacts in one place</Text>
+    </Container>
   );
 }
 
 export default Home;
 
-const Box = styled.div`
-  height: 90vh;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  height: 85vh;
 `;
 
-const Image = styled.img`
-  height: 100%;
-  object-fit: fill;
+const Title = styled.h1`
+  font-size: ${props => props.theme.fontSizes.xxxl};
+  color: ${props => props.theme.colors.blue};
+  font-weight: 900;
+`;
+
+const Text = styled.p`
+  font-size: ${props => props.theme.fontSizes.xxl};
+  color: ${props => props.theme.colors.blue};
+  font-weight: 900;
 `;

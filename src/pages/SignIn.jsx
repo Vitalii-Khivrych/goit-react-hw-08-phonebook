@@ -12,7 +12,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import styled from '@emotion/styled';
 
 import authOperations from 'redux/auth/auth-operations';
 import authSelectors from 'redux/auth/auth-selectors';
@@ -105,7 +104,7 @@ export default function SignIn() {
               onChange={handleChange}
             />
 
-            <Btn
+            <Button
               type="submit"
               fullWidth
               variant="contained"
@@ -113,16 +112,10 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-            </Btn>
+            </Button>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
   );
 }
-
-const Btn = styled(Button)`
-  :hover {
-    background-color: #b5932c;
-  }
-`;

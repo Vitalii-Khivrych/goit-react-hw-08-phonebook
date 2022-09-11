@@ -1,15 +1,15 @@
 export const theme = Object.freeze({
   colors: {
-    accent: '#b5932c',
-    active: '#d87825',
+    accent: '#2196F3',
+    active: '#075e98',
     white: '#ffffff',
-    gray: '#9e9e9e',
+    blue: '#1f6289',
     light: '#f2f2f2',
     dark: '#212121',
     primary: '#1c1c26eb',
     btn: '#1976d2;',
 
-    mainBackground: ['linear-gradient(to bottom, #006d72, #bad3d6,  #e2e2e2)'],
+    mainBackground: ['linear-gradient(to bottom, #a6b9f7,  #e2e2e2)'],
     cardBackground: ['linear-gradient (90deg, #e4f3f3,#c2d1d5'],
   },
 
