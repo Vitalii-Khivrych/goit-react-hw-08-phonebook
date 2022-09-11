@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgoit_react_hw_08_phonebook=self.webpackChunkgoit_react_hw_08_phonebook||[]).push([[415],{5415:function(e,t,n){n.r(t);var i,o,c=n(168),h=(n(2791),n(4378)),r=n(6088),a=n(3329);t.default=function(){return(0,a.jsx)(s,{children:(0,a.jsx)(u,{src:h,alt:"Home poster"})})};var s=r.Z.div(i||(i=(0,c.Z)(["\n  height: 90vh;\n"]))),u=r.Z.img(o||(o=(0,c.Z)(["\n  height: 100%;\n  object-fit: fill;\n"])))},4378:function(e,t,n){e.exports=n.p+"static/media/background-image.8bed7d25e40359432411.jpg"}}]);
-//# sourceMappingURL=415.70605a7d.chunk.js.map
