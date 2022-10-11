@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 function Home() {
   return (
     <Container>
-      <Title>Yor Phonebook</Title>
+      <Title>Your Phonebook</Title>
       <Text>Connect with your contacts!</Text>
       <Text>All your contacts in one place</Text>
     </Container>
